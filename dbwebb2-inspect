@@ -180,6 +180,9 @@ function createGithubUrl()
         "js")
            course="js-v2"
            ;;
+        "webapp")
+           course="webapp-v4"
+           ;;
     esac
 
     echo "https://github.com/dbwebb-se/$course$extra"
@@ -1145,11 +1148,11 @@ function badUsage ()
 "For an overview of the command, execute:"
 "dbwebb-inspect --help"
     )
-    
+
     if [ ! -z "$message" ]; then
         printf "$message\n"
     fi
-    
+
     printf "%s\n" "${txt[@]}"
 }
 #---------------------------- INSPECT PYTHON START ----------------------------
@@ -1159,11 +1162,11 @@ function badUsage ()
 #
 pythonme()
 {
-    headerForTest "-- me-page" "-- ${DBW_WWW}$DBW_COURSE/$KMOM#resultat_redovisning" 
+    headerForTest "-- me-page" "-- ${DBW_WWW}$DBW_COURSE/$KMOM#resultat_redovisning"
     openFilesInEditor "me"
     checkKmomDir "me"
 
-    printUrl "me.cgi" "me"  
+    printUrl "me.cgi" "me"
     printUrl "redovisning.cgi" "me"
 }
 
@@ -1197,15 +1200,15 @@ pythonplane()
 {
     local target="me/$KMOM/plane"
     local where="$EXEC_DIR/$KMOM/plane"
-    
+
     headerForTest "-- plane" "-- ${DBW_WWW}uppgift/ditt-forsta-python-skript"
     openFilesInEditor "$target"
     checkKmomDir "$target"
 
     inspectCommand "plane.py" "$where" "python3 plane.py"
     inspectCommand "plane1.py" "$where" "python3 plane1.py"
-    
-    printUrl "plane1.cgi" "$target"  
+
+    printUrl "plane1.cgi" "$target"
 }
 
 
@@ -1235,21 +1238,21 @@ pythonmarvin5()
 
     opts="--version"
     inspectCommand "$main" "$where" "python3 $main $opts" "$opts"
-    
+
     # Ping
     opts="ping ${DBW_WWW}humans.txt"
     inspectCommand "$main" "$where" "python3 $main $opts" "$opts"
-    
+
     opts="ping-history"
     inspectCommand "$main" "$where" "python3 $main $opts" "$opts"
 
     # Get
     opts="get ${DBW_WWW}humans.txt"
     inspectCommand "$main" "$where" "python3 $main $opts" "$opts"
-    
+
     opts="--output=humans.txt get ${DBW_WWW}humans.txt"
     inspectCommand "$main" "$where" "python3 $main $opts" "$opts"
-    
+
     assert 0 "test -f $where/humans.txt" "File humans.txt is missing."
     cat "$where/humans.txt"
 
@@ -1289,16 +1292,16 @@ pythonAdventure()
 
     opts="--version"
     inspectCommand "$main" "$where" "python3 $main $opts" "$opts"
-    
+
     opts="--info"
     inspectCommand "$main" "$where" "python3 $main $opts" "$opts"
-    
+
     opts="--about"
     inspectCommand "$main" "$where" "python3 $main $opts" "$opts"
-    
+
     opts="--cheat"
     inspectCommand "$main" "$where" "python3 $main $opts" "$opts"
-    
+
     # run it
     opts=""
     inspectCommand "$main" "$where" "python3 $main $opts" "$opts"
@@ -1346,7 +1349,7 @@ pythonexercise()
     checkKmomDir "$target"
     inspectCommand "$main" "$EXEC_DIR/$KMOM/$lab" "python3 $main"
 }
-    
+
 
 
 #
@@ -1432,10 +1435,10 @@ pythonkmom10()
 #
 javascript1me()
 {
-    headerForTest "-- me-page" "-- ${DBW_WWW}${DBW_COURSE}$KMOM#resultat_redovisning" 
+    headerForTest "-- me-page" "-- ${DBW_WWW}${DBW_COURSE}$KMOM#resultat_redovisning"
     openFilesInEditor "me"
     checkKmomDir "me"
-    printUrl "me.html" "me"  
+    printUrl "me.html" "me"
     printUrl "redovisning.html" "me"
 }
 
@@ -1477,7 +1480,7 @@ javascript1exercise()
     openFilesInEditor "$target"
     checkKmomDir "$target"
     fileIsReadable "$target/$main"
-    printUrl "$main" "$target"  
+    printUrl "$main" "$target"
 }
 
 
@@ -1569,9 +1572,9 @@ function htmlphp()
 {
     TREE_OPTIONS="-d"
     inspectIntro
-    
+
     local meDir=
-    
+
     meDir="$( echo "$KMOM" | sed 's/kmom0/me/g' | sed 's/kmom/me/g' )"
     METARGET="me/$KMOM/$meDir"
 }
@@ -1595,11 +1598,11 @@ function htmlphplab()
 {
     local lab="$1"
     local target="me/$KMOM/$lab"
-    
-    headerForTest "-- Lab" "-- ${DBW_WWW}$DBW_COURSE/$lab" 
+
+    headerForTest "-- Lab" "-- ${DBW_WWW}$DBW_COURSE/$lab"
     openFilesInEditor "$target"
     checkKmomDir "$target"
-    printUrl "" "$target"  
+    printUrl "" "$target"
     inspectCommand "answer.php" "$EXEC_DIR/$KMOM/$lab" "php answer.php"
 }
 
@@ -1612,11 +1615,11 @@ function htmlphpsqllab()
 {
     local lab="$1"
     local target="me/$KMOM/$lab"
-    
-    headerForTest "-- Lab" "-- ${DBW_WWW}$DBW_COURSE/$lab" 
+
+    headerForTest "-- Lab" "-- ${DBW_WWW}$DBW_COURSE/$lab"
     openFilesInEditor "$target"
     checkKmomDir "$target"
-    printUrl "" "$target"  
+    printUrl "" "$target"
     inspectCommand "answer.bash" "$EXEC_DIR/$KMOM/$lab" "./answer.bash"
 }
 
@@ -1654,7 +1657,7 @@ function htmlphpkmom03()
     viewFileContent "multipage.php" "$METARGET"
 
     htmlphplab "lab2"
-    
+
     inspectExercise "multi" "uppgift/bygg-en-multisida-och-testa-arrayer"
 }
 
@@ -1705,9 +1708,9 @@ function htmlphpkmom06()
 {
     TREE_OPTIONS="-d"
     inspectMe "$METARGET" "me.php" "report.php" "htmlphp/proj6"
-    
+
     viewFileContent "admin.php" "$METARGET"
-    
+
     htmlphplab "lab5"
 }
 
@@ -1746,9 +1749,9 @@ function design()
     validateKmom "me"
 
 
-    
+
     local meDir=
-    
+
     meDir="$( echo "$KMOM" | sed 's/kmom0/me/g' | sed 's/kmom/me/g' )"
     METARGET="me/$KMOM/$meDir"
 }
@@ -1772,10 +1775,10 @@ function designRepo()
 {
     local repo="$1"
     local target="me/$repo"
-    
-    headerForTest "-- Repo $repo" "-- ${DBW_WWW}$DBW_COURSE/$target" 
+
+    headerForTest "-- Repo $repo" "-- ${DBW_WWW}$DBW_COURSE/$target"
     openFilesInEditor "$target"
-    printUrl "" "$target"  
+    printUrl "" "$target"
 
     isGitRepo "$target"
     hasGitTagBetween "$EXEC_DIR/$repo" "$2" "$3" > /dev/null
@@ -2176,10 +2179,10 @@ function oophpRepo()
 {
     local repo="$1"
     local target="me/$repo"
-    
-    headerForTest "-- Repo $repo" "-- ${DBW_WWW}$DBW_COURSE/$target" 
+
+    headerForTest "-- Repo $repo" "-- ${DBW_WWW}$DBW_COURSE/$target"
     openFilesInEditor "$target"
-    printUrl "" "$target"  
+    printUrl "" "$target"
 
     isGitRepo "$target"
     hasGitTagBetween "$EXEC_DIR/$repo" "$2" "$3" > /dev/null
@@ -2300,7 +2303,7 @@ function oophpkmom10()
 function phpmvc()
 {
     inspectIntro
-    
+
     METARGET="me/$KMOM"
 }
 
@@ -2394,7 +2397,7 @@ function phpmvckmom10()
 function javascript()
 {
     inspectIntro
-    
+
     METARGET="me/$KMOM"
 }
 
@@ -2511,7 +2514,7 @@ function linuxlast()
 linuxExerciseScript()
 {
     local target="me/$KMOM/$1"
-    
+
     inspectCommand "hello.bash" "$THEDIR/$target" "bash hello.bash"
     viewFileContent "hello.bash" "$target"
 
@@ -2578,7 +2581,7 @@ linuxExerciseCommands()
 linuxExerciseIrc()
 {
     local target="me/$KMOM/$1"
-    
+
     pushd "$THEDIR/$target"
     for file in ?.txt; do
         viewFileContent "$file" "$target"
@@ -2627,7 +2630,7 @@ function linuxkmom03()
         inspectExercise "irc" "uppgift/hitta-saker-i-en-loggfil-med-unix-kommandon" "log.txt" "solutions.bash" "" "" "solutions.bash" "bash solutions.bash"
 
         linuxExerciseIrc "irc"
-        
+
         inspectExercise "script" "uppgift/mina-forsta-bash-script"
         linuxExerciseScript "script"
 
@@ -2695,7 +2698,7 @@ function linuxkmom05()
 {
     inspectLab "uppgift/linux-lab4-asynkron-programmering" "node2" "answer.js" "node answer.js"
 
-    # 2018 should start up 
+    # 2018 should start up
     inspectExerciseHeader "maze" "uppgift/los-mazen-med-din-mazerunner-i-bash" "$KMOM/maze"
     #target="example/nodejs/maze"
     target="$EXEC_DIR/$KMOM/maze"
@@ -2838,11 +2841,11 @@ function webappkmom10()
 #
 function webglme()
 {
-    headerForTest "-- me-page" "-- ${DBW_WWW}$DBW_COURSE/$KMOM#resultat_redovisning" 
+    headerForTest "-- me-page" "-- ${DBW_WWW}$DBW_COURSE/$KMOM#resultat_redovisning"
     openFilesInEditor "me/redovisa/"
     checkKmomDir "me/redovisa"
 
-    printUrl "" "me/redovisa"  
+    printUrl "" "me/redovisa"
 
     pressEnterToContinue
 }
@@ -2881,12 +2884,12 @@ function webgllab()
 {
     local lab="$1"
     local target="me/$KMOM/$lab"
-    
-    headerForTest "-- Lab" "-- ${DBW_WWW}$DBW_COURSE/$lab" 
+
+    headerForTest "-- Lab" "-- ${DBW_WWW}$DBW_COURSE/$lab"
     openFilesInEditor "$target"
     checkKmomDir "$target"
-    printUrl "" "$target"  
-    
+    printUrl "" "$target"
+
     # Need support for lab to execute in nodejs environment
     #inspectCommand "answer.js" "$EXEC_DIR/$KMOM/$lab" "php answer.php"
     pressEnterToContinue
@@ -2983,7 +2986,7 @@ headerForTest()
     task="$2"
 
     pressEnterToContinue
-    
+
     printf "$WRAP_HEADER"
     printf "\n$what"
     if [ ! -z "$task" ]; then
@@ -3027,7 +3030,7 @@ viewFileTree()
 changeToDirectory()
 {
     local dirname="$THEDIR/$1"
-    
+
     printf "\ncd \"%s/%s\"" "$THEDIR" "$1"
     printf "\n"
 }
@@ -3045,7 +3048,7 @@ printUrl()
     if [ "$what" == "-" ]; then
         what=
     fi
-    
+
     printf "\nURL: $BASE_URL/$DBW_COURSE/$where/$what"
 
     if [ -z "$what" ]; then
@@ -3060,7 +3063,7 @@ printUrl()
 
 
 #
-# Check if file exists and display it 
+# Check if file exists and display it
 #
 executeSQLite()
 {
@@ -3087,20 +3090,20 @@ executeSQLite()
 
 
 #
-# Check if file exists and display it 
+# Check if file exists and display it
 #
 viewFileContent()
 {
     local file="$1"
     local dir="$2"
     local fileAlt="$3"
-    
-    if [ ! -f "$THEDIR/$dir/$file" ]; then 
+
+    if [ ! -f "$THEDIR/$dir/$file" ]; then
         if [ -f "$THEDIR/$dir/$fileAlt" ]; then
             file="$fileAlt"
         fi
     fi
-    
+
     assert 0 "test -f \"$THEDIR/$dir/$file\"" "The file '$file' is missing or not readable."
 
     if [ $? -eq 0 ]; then
@@ -3125,7 +3128,7 @@ viewFileContent()
 checkKmomDir()
 {
     local dirname="$THEDIR/$1"
-    
+
     assert 0 "test -r $dirname -a -d $dirname" "Directory $dirname not readable."
 }
 
@@ -3137,7 +3140,7 @@ checkKmomDir()
 fileIsReadable()
 {
     local filename="$THEDIR/$1"
-    
+
     assert 0 "test -r $filename" "The file $filename is not readable."
 }
 
@@ -3232,12 +3235,12 @@ function inspectMe()
     fi
 
     assertSummaryAdd "me-page"
-    headerForTest "-- me-page" "-- ${DBW_WWW}$DBW_COURSE/$KMOM#resultat_redovisning$assignment" 
+    headerForTest "-- me-page" "-- ${DBW_WWW}$DBW_COURSE/$KMOM#resultat_redovisning$assignment"
     checkKmomDir "$target"
     viewFileTree "$target"
     #openFilesInEditor "$target"
 
-    printUrl "$mepage" "$target"  
+    printUrl "$mepage" "$target"
     [[ $reportpage ]] && printUrl "$reportpage" "$target"
     [[ $validate ]] && validateKmom "$validate"
 }
@@ -3262,7 +3265,7 @@ function inspectLab()
     headerForTest "-- $lab" "-- ${DBW_WWW}$url"
     viewFileTree "$target"
     #openFilesInEditor "$target"
-    printUrl "$urlfile" "$target" 
+    printUrl "$urlfile" "$target"
     checkKmomDir "$target"
     fileIsReadable "$target/$main"
     [[ $execute ]] && inspectCommand "$main" "$EXEC_DIR/$KMOM/$lab" "$execute"
@@ -3292,7 +3295,7 @@ inspectExercise()
     checkKmomDir "$target"
     viewFileTree "$target"
     #openFilesInEditor "$target"
-    
+
     # As files
     [ -z "$file1" ] || viewFileContent "$file1" "$target"
     [ -z "$file2" ] || viewFileContent "$file2" "$target"
@@ -3331,23 +3334,23 @@ dbwebbInspectTargetNotReadable()
 {
     #local thedir="$( readlink -f "$REPO" )"
     local thedir="$( get_realpath "$REPO" )"
-    
-    if [ ! -d "$thedir" ]; then 
-        
+
+    if [ ! -d "$thedir" ]; then
+
         printf "\n$MSG_FAILED Directory '$REPO' not readable.\n"
 
         local dirname=$( dirname "$REPO" )
-        if [ ! -r "$dirname" ]; then 
+        if [ ! -r "$dirname" ]; then
             printf "\n$MSG_FAILED Directory '$dirname' not readable.\n"
         else
             printf "\nDirectory '$dirname' exists, doing an ls.\n"
             ls "$dirname"
         fi
-        
+
         printf "\n$MSG_FAILED Perhaps login to the studserver and execute the command:\n"
         echo "sudo setpre-dbwebb-kurser.bash $THEUSER"
-        echo  
-    fi 
+        echo
+    fi
 }
 
 
@@ -3372,14 +3375,14 @@ dbwebbInspectCheckEnvironment()
 publishKmom()
 {
     [[ $COPY_DIR ]] || return
-    
+
     rm -rf "$COPY_DIR"
     mkdir "$COPY_DIR"
-    
+
     printf "\nPublishing a copy of %s to '%s'" "$KMOM" "$COPY_DIR"
     rsync -a --exclude 'kmom*' "$THEDIR/me/" "$COPY_DIR/"
     rsync -a "$THEDIR/me/$KMOM/" "${COPY_DIR}${KMOM}/"
-    
+
     publishChmod "$COPY_DIR"
 
     printf "\nURL: %s" "$COPY_URL"
@@ -3431,7 +3434,7 @@ inspectCommand()
     if [ ! -z "$what" ]; then
         assert 0 "test -f \"$filename\" -o -r \"$filename\"" "The file '$what' is missing or not readable."
     fi
-    
+
     if [ $? == 0 ]; then
         printf "\nExecute '%s' [Yn]? " "$cmd"
 
@@ -3500,13 +3503,13 @@ runServer()
     local pid=
 
     local filename="$move/$what"
-    
+
     export SERVER_LOG="/tmp/dbwebb-inspect-server-log.$DBW_USER"
 
     if [ ! -z "$what" ]; then
         assert 0 "test -f \"$filename\" -o -r \"$filename\"" "The file '$what' is missing or not readable."
     fi
-    
+
     if [ $? == 0 ]; then
         serverSettings
         checkPortIsFree
@@ -3517,7 +3520,7 @@ runServer()
         if [ "$answer" = "y" -o "$answer" = "Y" ]; then
 
             pushd "$move" > /dev/null
-            
+
             echo ">>>"
 
             [[ -f pid ]] && rm pid
@@ -3584,7 +3587,7 @@ killServer()
     rm -f "$SERVER_LOG"
     echo "--------- Logfile end    ---------"
     echo "<<<"
-    popd > /dev/null    
+    popd > /dev/null
 }
 
 
@@ -3631,7 +3634,7 @@ do
         --archive)
             if [ ! -d "$2" ]; then
                 badUsage "Path to --archive '$2' is not a directory."
-                exit 2                
+                exit 2
             fi
             ARCHIVE="$2"
             shift
@@ -3641,7 +3644,7 @@ do
         --config)
             if [ ! -f "$2" ]; then
                 badUsage "Path to --config '$2' is not a file."
-                exit 2                
+                exit 2
             fi
             DBW_INSPECT_CONFIGFILE="$2"
             shift
@@ -3651,13 +3654,13 @@ do
         --publish-to)
             if [ ! -d "$2" ]; then
                 badUsage "Path to --publish-to '$2' is not a directory."
-                exit 2                
+                exit 2
             fi
             COPY_DIR="$2/inspect/"
             shift
             shift
         ;;
-        
+
         --publish-url)
             COPY_URL="$2/inspect/"
             shift
@@ -3676,15 +3679,15 @@ do
             shift
         ;;
 
-        -*) 
+        -*)
             badUsage "$MSG_FAILED Option/command '$1' not recognized."
             exit 2
         ;;
-        
-        *) 
+
+        *)
             break
         ;;
-        
+
     esac
 done
 
@@ -3706,7 +3709,7 @@ if [ -z "$REPO" ]; then
     exit 2
 elif [ -z "$KMOM" ]; then
     badUsage "Missing kmom."
-    exit 2    
+    exit 2
 fi
 
 #THEDIR=$( readlink -f "$REPO" )
@@ -3742,25 +3745,25 @@ THEUSER=$( ls -ld "$REPO" | awk '{print $3}' )
 DBW_WWW_HOST=${DBW_WWW_HOST:=http://www.student.bth.se/}
 DBW_REMOTE_BASEDIR=${DBW_REMOTE_BASEDIR:=dbwebb-kurser}
 if [[ ! $BASE_URL ]]; then
-    BASE_URL="$DBW_WWW_HOST~$THEUSER/$DBW_REMOTE_BASEDIR"    
+    BASE_URL="$DBW_WWW_HOST~$THEUSER/$DBW_REMOTE_BASEDIR"
 fi
 
 # Guess COPY_URL if not available
 if [[ ! $COPY_URL ]]; then
-    COPY_URL="$DBW_WWW_HOST~$USER/$DBW_REMOTE_BASEDIR/inspect/"    
+    COPY_URL="$DBW_WWW_HOST~$USER/$DBW_REMOTE_BASEDIR/inspect/"
 fi
 
 # Check if ARCHIVE should be used
 if [[ $ARCHIVE ]]; then
     echo -n "Archiving, please wait..."
-    
+
     if [ ! -d "$ARCHIVE/$THEUSER/$DBW_COURSE" ]; then
         echo -n "creating '$ARCHIVE/$THEUSER/$DBW_COURSE'..."
         install --mode=770 --directory "$ARCHIVE/$THEUSER/$DBW_COURSE"
     fi
-    
+
     rsync -a --no-perms --exclude vendor --delete "$THEDIR/me/" "$ARCHIVE/$THEUSER/$DBW_COURSE/"
-    find "$ARCHIVE/$THEUSER/$DBW_COURSE/" -user $USER -exec chmod g+w {} \;   
+    find "$ARCHIVE/$THEUSER/$DBW_COURSE/" -user $USER -exec chmod g+w {} \;
     echo "done."
 fi
 
@@ -3819,9 +3822,9 @@ case "$KMOM" in
     kmom05)     ${DBW_COURSE}; "${DBW_COURSE}${KMOM}"; "${DBW_COURSE}last";;
     kmom06)     ${DBW_COURSE}; "${DBW_COURSE}${KMOM}"; "${DBW_COURSE}last";;
     kmom10)     ${DBW_COURSE}; "${DBW_COURSE}${KMOM}"; "${DBW_COURSE}last";;
-    *)          
+    *)
         badUsage "\n$MSG_FAILED Invalid combination of course '$DBW_COURSE' and kmom: '$KMOM'.\nYou can only inspect a complete kmom."
-        exit 1 
+        exit 1
         ;;
 esac
 
@@ -3835,7 +3838,7 @@ headerForTest "-- dbwebb inspect summary"
 if [ $FAULTS -gt 0 ]; then
     printf "\n\n$MSG_FAILED"
     STATUS=1
-else 
+else
     printf "\n\n$MSG_OK"
     STATUS=0
 fi
@@ -3847,7 +3850,7 @@ printf "$ASSERTS_SUMMARY\n"
 
 if [ $STATUS -eq 0 ]; then
     printf "$MSG_OK Inspect PASSED all tests :-)\n\n"
-else 
+else
     printf "$MSG_FAILED Inspect FAILED to pass all tests :-|\n\n"
 fi
 

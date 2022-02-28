@@ -180,6 +180,9 @@ function createGithubUrl()
         "js")
            course="js-v2"
            ;;
+        "webapp")
+           course="webapp-v4"
+           ;;
     esac
 
     echo "https://github.com/dbwebb-se/$course$extra"
@@ -1147,11 +1150,11 @@ function badUsage ()
 "For an overview of the command, execute:"
 "dbwebb-validate --help"
     )
-    
+
     if [ ! -z "$message" ]; then
         printf "$message\n"
     fi
-    
+
     printf "%s\n" "${txt[@]}"
 }
 # --------------- DBWEBB-VALIDATE MAIN START HERE ---------------
